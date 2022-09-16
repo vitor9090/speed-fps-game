@@ -1,159 +1,198 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/gd_camera.gd" type="Script" id=1]
 [ext_resource path="res://src/gd_player_movement.gd" type="Script" id=2]
+[ext_resource path="res://textures/mat_grid.tres" type="Material" id=3]
+[ext_resource path="res://src/gd_ground_check_pos.gd" type="Script" id=4]
 
 [sub_resource type="BoxShape" id=1]
 
+[sub_resource type="BoxShape" id=2]
+extents = Vector3( 0.45, 0.1, 0.44 )
+
 [node name="Spatial" type="Spatial"]
 
-[node name="CSGPolygon" type="CSGPolygon" parent="."]
-transform = Transform( 100, 0, 0, 0, 1, 0, 0, 0, 100, -50, 0, 50 )
-use_in_baked_light = true
-use_collision = true
-polygon = PoolVector2Array( 0, 0, 0, 0, 1, 0 )
-
 [node name="KinematicBody" type="KinematicBody" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.84713, 0 )
+transform = Transform( 1, 0, 0, 0, 0.7, 0, 0, 0, 1, 0, 3, 0.5 )
 script = ExtResource( 2 )
-jump_force = 1000.0
+max_base_speed = 1500.0
+max_speed = 4000.0
+gravity = 40.0
+jump_force = 800.0
 
 [node name="Camera" type="Camera" parent="KinematicBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0 )
 script = ExtResource( 1 )
-height = 1.5
 
 [node name="CollisionShape" type="CollisionShape" parent="KinematicBody"]
 transform = Transform( 0.5, 0, 0, 0, 2, 0, 0, 0, 0.5, 0, 0, 0 )
 shape = SubResource( 1 )
 
-[node name="ray_vert1" type="RayCast" parent="KinematicBody/CollisionShape"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -1, 0.5 )
+[node name="nd_rays" type="Spatial" parent="KinematicBody"]
+transform = Transform( 1, 0, 0, 0, 1.42857, 0, 0, 0, 1, 0, 0, 0 )
+script = ExtResource( 4 )
+
+[node name="ray_vert1" type="RayCast" parent="KinematicBody/nd_rays"]
+transform = Transform( 1, 0, 0, 0, 0.7, 0, 0, 0, 1, 0.25, 0, 0.25 )
 enabled = true
 cast_to = Vector3( 0, -0.3, 0 )
 
-[node name="ray_vert2" type="RayCast" parent="KinematicBody/CollisionShape"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -1, -0.5 )
+[node name="ray_vert2" type="RayCast" parent="KinematicBody/nd_rays"]
+transform = Transform( 1, 0, 0, 0, 0.7, 0, 0, 0, 1, -0.25, 0, -0.25 )
 enabled = true
 cast_to = Vector3( 0, -0.3, 0 )
 
-[node name="ray_vert3" type="RayCast" parent="KinematicBody/CollisionShape"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -1, 0.5 )
+[node name="ray_vert3" type="RayCast" parent="KinematicBody/nd_rays"]
+transform = Transform( 1, 0, 0, 0, 0.7, 0, 0, 0, 1, -0.25, 0, 0.25 )
 enabled = true
 cast_to = Vector3( 0, -0.3, 0 )
 
-[node name="ray_vert4" type="RayCast" parent="KinematicBody/CollisionShape"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -1, -0.5 )
+[node name="ray_vert4" type="RayCast" parent="KinematicBody/nd_rays"]
+transform = Transform( 1, 0, 0, 0, 0.7, 0, 0, 0, 1, 0.25, 0, -0.25 )
 enabled = true
 cast_to = Vector3( 0, -0.3, 0 )
 
-[node name="Node" type="Node" parent="."]
+[node name="Area" type="Area" parent="KinematicBody"]
 
-[node name="CSGBox" type="CSGBox" parent="Node"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.7323, 0, 0 )
-use_in_baked_light = true
-use_collision = true
-width = 9.21592
-depth = 10.7661
+[node name="CollisionShape" type="CollisionShape" parent="KinematicBody/Area"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.01162, 0 )
+shape = SubResource( 2 )
 
-[node name="CSGBox5" type="CSGBox" parent="Node"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.7151, 0, -22.0363 )
-use_in_baked_light = true
+[node name="CSGCombiner" type="CSGCombiner" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.428368, -0.321277, 0 )
 use_collision = true
-width = 9.21592
-depth = 10.7661
 
-[node name="CSGBox6" type="CSGBox" parent="Node"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21.9487, -1.90735e-06, -9.36328 )
-use_in_baked_light = true
-use_collision = true
-width = 9.21592
-depth = 10.7661
+[node name="CSGBox" type="CSGBox" parent="CSGCombiner"]
+width = 27.0
+height = 1.0
+depth = 27.0
+material = ExtResource( 3 )
 
-[node name="CSGBox7" type="CSGBox" parent="Node"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.43913, -1.90735e-06, 14.4912 )
-use_in_baked_light = true
-use_collision = true
-width = 9.21592
-depth = 10.7661
+[node name="CSGBox10" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -16.5 )
+width = 15.0
+height = 4.0
+depth = 6.0
+material = ExtResource( 3 )
 
-[node name="CSGBox8" type="CSGBox" parent="Node"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.2461, 1.11029, 14.0565 )
-use_in_baked_light = true
-use_collision = true
-width = 9.21592
-depth = 10.7661
+[node name="CSGBox3" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 0.866025, -0.5, 0, 0.5, 0.866025, 0, 0, 0, 1, 15.5, 2.5, 0 )
+width = 14.0
+height = 1.0
+depth = 6.0
+material = ExtResource( 3 )
 
-[node name="CSGBox9" type="CSGBox" parent="Node"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21.561, 2.09833, 14.0565 )
-use_in_baked_light = true
-use_collision = true
-width = 9.21592
-depth = 10.7661
+[node name="CSGBox5" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 14, 2.5, -8 )
+width = 14.0
+height = 1.0
+depth = 6.0
+material = ExtResource( 3 )
 
-[node name="CSGBox10" type="CSGBox" parent="Node"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27.724, 3.2697, 15.2674 )
-use_in_baked_light = true
-use_collision = true
-width = 9.21592
-depth = 10.7661
+[node name="CSGBox6" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 0.5, -0.866025, 0, 0.866025, 0.5, 0, 0, 0, 1, 13, 2.5, 8.5 )
+width = 14.0
+height = 1.0
+depth = 6.0
+material = ExtResource( 3 )
 
-[node name="CSGBox15" type="CSGBox" parent="Node"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 34.8491, 4.24314, 15.2674 )
-use_in_baked_light = true
-use_collision = true
-width = 9.21592
-depth = 10.7661
+[node name="CSGBox4" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 28.5, 6, 0 )
+width = 14.0
+height = 1.0
+depth = 6.0
+material = ExtResource( 3 )
 
-[node name="CSGBox2" type="CSGBox" parent="Node"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -21.3964, 2.48645, 0 )
-use_in_baked_light = true
-use_collision = true
-width = 9.21592
-depth = 10.7661
+[node name="CSGBox11" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 7.5, -8 )
+width = 14.0
+height = 1.0
+depth = 6.0
+material = ExtResource( 3 )
 
-[node name="CSGBox3" type="CSGBox" parent="Node"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -33.1626, 4.53063, 0 )
-use_in_baked_light = true
-use_collision = true
-width = 9.21592
-depth = 10.7661
+[node name="CSGBox12" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 9, -20.5 )
+width = 14.0
+height = 1.0
+depth = 15.0
+material = ExtResource( 3 )
 
-[node name="CSGBox11" type="CSGBox" parent="Node"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -51.502, -0.961024, 0 )
-use_in_baked_light = true
-use_collision = true
-width = 9.21592
-height = 60.4201
-depth = 122.5
+[node name="CSGBox13" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 12, -20.5 )
+width = 14.0
+height = 1.0
+depth = 7.0
+material = ExtResource( 3 )
 
-[node name="CSGBox12" type="CSGBox" parent="Node"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 54.0439, -0.961024, 0 )
-use_in_baked_light = true
-use_collision = true
-width = 9.21592
-height = 60.4201
-depth = 122.5
+[node name="CSGBox14" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 30.5, 10.5, -25.5 )
+width = 3.0
+height = 1.0
+depth = 3.0
+material = ExtResource( 3 )
 
-[node name="CSGBox13" type="CSGBox" parent="Node"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.65546, -0.961024, 48.9586 )
-use_in_baked_light = true
-use_collision = true
-width = 142.217
-height = 60.4201
-depth = 10.9801
+[node name="CSGBox15" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 13.5, -20.5 )
+width = 3.0
+height = 1.0
+depth = 3.0
+material = ExtResource( 3 )
 
-[node name="CSGBox14" type="CSGBox" parent="Node"]
-transform = Transform( 1, -0.000593412, 0, 0.000593412, 1, 0, 0, 0, 1, 3.92418, -0.961024, -49.5759 )
-use_in_baked_light = true
-use_collision = true
-width = 142.217
-height = 60.4201
-depth = 10.9801
+[node name="CSGBox16" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 14.5, -20.5 )
+width = 3.0
+height = 1.0
+depth = 3.0
+material = ExtResource( 3 )
 
-[node name="CSGBox4" type="CSGBox" parent="Node"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -33.1626, 7.50094, -12.8794 )
-use_in_baked_light = true
-use_collision = true
-width = 9.21592
-depth = 10.7661
+[node name="CSGBox17" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 2.55, 4.41673, 0, -4.57261, 2.64, 0, 0, 0, 1, -1, 9.5, -21 )
+width = 3.0
+height = 1.0
+depth = 3.0
+material = ExtResource( 3 )
+
+[node name="CSGBox8" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 28.5, 7, 3 )
+width = 14.0
+height = 1.0
+depth = 6.0
+material = ExtResource( 3 )
+
+[node name="CSGBox7" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 8.5, 8.5 )
+width = 19.0
+height = 1.0
+depth = 6.0
+material = ExtResource( 3 )
+
+[node name="CSGBox2" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 32.5 )
+width = 6.0
+height = 1.0
+depth = 27.0
+material = ExtResource( 3 )
+
+[node name="CSGBox3" type="CSGBox" parent="CSGCombiner/CSGBox2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
+operation = 2
+width = 5.0
+height = 1.0
+depth = 26.0
+material = ExtResource( 3 )
+
+[node name="CSGBox9" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
+width = 100.0
+depth = 100.0
+material = ExtResource( 3 )
+
+[node name="CSGBox10" type="CSGBox" parent="CSGCombiner/CSGBox9"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0 )
+operation = 2
+width = 99.0
+depth = 99.0
+material = ExtResource( 3 )
+
+[connection signal="body_entered" from="KinematicBody/Area" to="KinematicBody" method="_on_Area_body_entered"]
+[connection signal="body_exited" from="KinematicBody/Area" to="KinematicBody" method="_on_Area_body_exited"]
