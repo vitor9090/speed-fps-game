@@ -3,7 +3,9 @@ extends Camera
 export (float) var sensitivity = 0.01
 
 export (float) var standing_height = 0.5
-export (float) var crouch_height = 0.25
+export (float) var crouch_height = 0.15
+
+export (NodePath) var target:NodePath = ''
 
 var debug_cam_speed = 10.0
 
@@ -38,16 +40,18 @@ func _process(delta):
 			
 			if Input.is_action_just_pressed("debug_cam_activate"):
 				camera_mode = CAM_MODES.PLAY
-				
+		
+		
 		CAM_MODES.PLAY:
-			translation.x = get_parent().translation.x
-			
-			if get_parent().crouching:
-				translation.y = lerp(translation.y + standing_height, get_parent().translation.y + standing_height, 0.5)
-			else:
-				translation.y = lerp(translation.y + crouch_height, get_parent().translation.y + crouch_height, 0.5)
+			if !target.is_empty():
+				translation.x = get_node(target).translation.x
+				
+				if get_node(target).crouching:
+					translation.y = lerp(translation.y + standing_height, get_node(target).translation.y + standing_height, 0.5)
+				else:
+					translation.y = lerp(translation.y + crouch_height, get_node(target).translation.y + crouch_height, 0.5)
 
-			translation.z = get_parent().translation.z
-			
+				translation.z = get_node(target).translation.z
+				
 			if Input.is_action_just_pressed("debug_cam_activate"):
 				camera_mode = CAM_MODES.DEBUG
