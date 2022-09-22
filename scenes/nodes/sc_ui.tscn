@@ -1,0 +1,126 @@
+[gd_scene load_steps=10 format=3 uid="uid://crmn7ff1e0kos"]
+
+[ext_resource type="Script" path="res://src/ui/gd_health_display.gd" id="1"]
+[ext_resource type="Shader" path="res://src/shaders/fragment/sh_circle.gdshader" id="2"]
+[ext_resource type="Shader" path="res://src/shaders/fragment/sh_color_limiter.gdshader" id="3"]
+[ext_resource type="Shader" path="res://src/shaders/fragment/sh_base_shader.gdshader" id="4"]
+[ext_resource type="Texture2D" uid="uid://d10yuy67qepid" path="res://textures/sp_health_point.png" id="5"]
+
+[sub_resource type="ShaderMaterial" id="1"]
+shader = ExtResource("3")
+shader_parameter/color_modifier = Vector3(16, 8, 8)
+
+[sub_resource type="ShaderMaterial" id="3"]
+shader = ExtResource("2")
+shader_parameter/border_width = 0.31
+shader_parameter/circle_color = null
+shader_parameter/circle_size = 0.467
+
+[sub_resource type="ShaderMaterial" id="4"]
+shader = ExtResource("2")
+shader_parameter/border_width = 0.146
+shader_parameter/circle_color = Vector3(1, 1, 1)
+shader_parameter/circle_size = 0.382
+
+[sub_resource type="ShaderMaterial" id="2"]
+shader = ExtResource("4")
+shader_parameter/u_resolution = Vector2(100, 100)
+
+[node name="nd_ui" type="Control"]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+pivot_offset = Vector2(-334, 202)
+
+[node name="nd_shaders" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="nd_shaders"]
+material = SubResource("1")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 4
+
+[node name="nd_gui" type="CanvasLayer" parent="."]
+
+[node name="nd_aim_border" type="ColorRect" parent="nd_gui"]
+show_behind_parent = true
+material = SubResource("3")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="nd_aim" type="ColorRect" parent="nd_gui"]
+material = SubResource("4")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="nd_health_container" type="HBoxContainer" parent="nd_gui"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -36.0
+offset_top = 16.0
+offset_bottom = 22.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+script = ExtResource("1")
+
+[node name="nd_point1" type="TextureRect" parent="nd_gui/nd_health_container"]
+offset_right = 6.0
+offset_bottom = 6.0
+texture = ExtResource("5")
+
+[node name="nd_point2" type="TextureRect" parent="nd_gui/nd_health_container"]
+offset_left = 10.0
+offset_right = 16.0
+offset_bottom = 6.0
+texture = ExtResource("5")
+
+[node name="nd_point3" type="TextureRect" parent="nd_gui/nd_health_container"]
+offset_left = 20.0
+offset_right = 26.0
+offset_bottom = 6.0
+texture = ExtResource("5")
+
+[node name="nd_point4" type="TextureRect" parent="nd_gui/nd_health_container"]
+offset_left = 30.0
+offset_right = 36.0
+offset_bottom = 6.0
+texture = ExtResource("5")
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+material = SubResource("2")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 14.0
+offset_top = 3.0
+offset_right = 14.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2

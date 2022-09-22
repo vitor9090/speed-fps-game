@@ -2,9 +2,9 @@ extends Container
 
 
 func _ready():
-	margin_right = get_viewport().size.x
-	margin_bottom = get_viewport().size.y
+	offset_right = get_viewport().size.x
+	offset_bottom = get_viewport().size.y
 
 	for children in get_children():
-		children.margin_right = get_viewport().size.x
-		children.margin_bottom = get_viewport().size.y
+		children.offset_right = get_viewport().size.x
+		children.offset_bottom = get_viewport().size.y

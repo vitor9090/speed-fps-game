@@ -3,4 +3,4 @@
 [node name="door1"]
 
 [node name="Door001" parent="RootNode" index="0"]
-transform = Transform( 100, 0, 0, 0, -3.57628e-05, 100, 0, -100, -3.57628e-05, 0, 0, 0 )
+transform = Transform3D( 100, 0, 0, 0, -3.57628e-05, 100, 0, -100, -3.57628e-05, 0, 0, 0 )

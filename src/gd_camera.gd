@@ -1,11 +1,11 @@
-extends Camera
+extends Camera3D
 
-export (float) var sensitivity = 0.01
+@export var sensitivity = 0.01
 
-export (float) var standing_height = 0.5
-export (float) var crouch_height = 0.15
+@export var standing_height = 0.5
+@export var crouch_height = 0.15
 
-export (NodePath) var target:NodePath = ''
+@export var target:NodePath = ''
 
 var debug_cam_speed = 10.0
 
@@ -14,10 +14,10 @@ enum CAM_MODES{
 	PLAY
 }
 
-export (CAM_MODES) var camera_mode = CAM_MODES.PLAY 
+@export var camera_mode = CAM_MODES.PLAY 
 
 func _ready():
-	set_as_toplevel(true)
+	set_as_top_level(true)
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _input(ev):
@@ -28,6 +28,10 @@ func _input(ev):
 		rotation.x = clamp(rotation.x, -1.55, 1.55)
 
 func _process(delta):
+	if $RayCast3d.is_colliding():
+		if $RayCast3d.get_collider().is_in_group('interactable'):
+			print($RayCast3d.get_collider())
+	
 	match camera_mode:
 		CAM_MODES.DEBUG:
 			var move_vector = Vector3(
@@ -36,22 +40,21 @@ func _process(delta):
 				Input.get_action_strength("move_foward") - Input.get_action_strength("move_down")
 				)
 			
-			translation -= ((transform.basis.z * move_vector.z) + (transform.basis.y * move_vector.y) + (transform.basis.x * move_vector.x)) * debug_cam_speed * delta
+			position -= ((transform.basis.z * move_vector.z) + (transform.basis.y * move_vector.y) + (transform.basis.x * move_vector.x)) * debug_cam_speed * delta
 			
 			if Input.is_action_just_pressed("debug_cam_activate"):
 				camera_mode = CAM_MODES.PLAY
-		
-		
+				
 		CAM_MODES.PLAY:
 			if !target.is_empty():
-				translation.x = get_node(target).translation.x
+				position.x = get_node(target).position.x
 				
 				if get_node(target).crouching:
-					translation.y = lerp(translation.y + standing_height, get_node(target).translation.y + standing_height, 0.5)
+					position.y = lerp(position.y + standing_height, get_node(target).position.y + standing_height, 0.4)
 				else:
-					translation.y = lerp(translation.y + crouch_height, get_node(target).translation.y + crouch_height, 0.5)
+					position.y = lerp(position.y + crouch_height, get_node(target).position.y + crouch_height, 0.4)
 
-				translation.z = get_node(target).translation.z
+				position.z = get_node(target).position.z
 				
 			if Input.is_action_just_pressed("debug_cam_activate"):
 				camera_mode = CAM_MODES.DEBUG

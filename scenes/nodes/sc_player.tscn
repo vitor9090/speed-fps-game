@@ -1,35 +1,34 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=4 format=3 uid="uid://0qo4xt84leak"]
 
-[ext_resource path="res://src/gd_player_movement.gd" type="Script" id=2]
+[ext_resource type="Script" path="res://src/gd_player_movement.gd" id="2"]
 
-[sub_resource type="BoxShape" id=6]
-extents = Vector3( 0.3, 1.641, 0.3 )
+[sub_resource type="BoxShape3D" id="6"]
+size = Vector3(0.6, 3.282, 0.6)
 
-[sub_resource type="BoxShape" id=7]
-extents = Vector3( 0.3, 0.4, 0.3 )
+[sub_resource type="BoxShape3D" id="7"]
+size = Vector3(0.54, 0.8, 0.54)
 
-[node name="nd_player" type="KinematicBody"]
-transform = Transform( 1, 0, 0, 0, 0.7, 0, 0, 0, 1, 0, 3, 0.5 )
-script = ExtResource( 2 )
+[node name="nd_player" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 0.7, 0, 0, 0, 1, 0, 3, 0.5)
+script = ExtResource("2")
 max_base_speed = 1500.0
 max_speed = 4000.0
-gravity = 40.0
-jump_force = 800.0
+coyote_timer_max = 0.25
 
-[node name="CollisionShape" type="CollisionShape" parent="."]
-shape = SubResource( 6 )
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("6")
 
-[node name="nd_ground_check" type="Area" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.42857, 0 )
+[node name="nd_ground_check" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.42857, 0)
 
-[node name="CollisionShape" type="CollisionShape" parent="nd_ground_check"]
-shape = SubResource( 7 )
+[node name="CollisionShape3D" type="CollisionShape3D" parent="nd_ground_check"]
+shape = SubResource("7")
 
-[node name="nd_height_check" type="Area" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.42857, 0 )
+[node name="nd_height_check" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.42857, 0)
 
-[node name="CollisionShape2" type="CollisionShape" parent="nd_height_check"]
-shape = SubResource( 6 )
+[node name="CollisionShape2" type="CollisionShape3D" parent="nd_height_check"]
+shape = SubResource("6")
 
 [connection signal="body_entered" from="nd_ground_check" to="." method="_on_nd_ground_check_body_entered"]
 [connection signal="body_exited" from="nd_ground_check" to="." method="_on_nd_ground_check_body_exited"]

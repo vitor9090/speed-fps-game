@@ -1,8 +1,15 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://yhb2ml80du1q"]
 
-[ext_resource path="res://src/gd_camera.gd" type="Script" id=2]
+[ext_resource type="PackedScene" uid="uid://crmn7ff1e0kos" path="res://scenes/nodes/sc_ui.tscn" id="1"]
+[ext_resource type="Script" path="res://src/gd_camera.gd" id="2"]
 
-[node name="Camera" type="Camera"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0 )
+[node name="Camera3D" type="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 current = true
-script = ExtResource( 2 )
+far = 400.0
+script = ExtResource("2")
+
+[node name="nd_ui" parent="." instance=ExtResource("1")]
+
+[node name="RayCast3d" type="RayCast3D" parent="."]
+target_position = Vector3(0, 0, -5)

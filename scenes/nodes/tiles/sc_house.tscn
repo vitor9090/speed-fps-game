@@ -1,0 +1,57 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scenes/nodes/tiles/sc_door.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/nodes/tiles/sc_window.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/nodes/tiles/sc_floor.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/nodes/tiles/sc_crawlspace.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/nodes/tiles/sc_wall.tscn" type="PackedScene" id=5]
+
+[node name="nd_house" type="Node3D"]
+
+[node name="nd_door" type="Node3D" parent="." instance=ExtResource( 1 )]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2, 2.5 )
+
+[node name="nd_window" type="Node3D" parent="." instance=ExtResource( 2 )]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2, 2.5 )
+
+[node name="nd_window2" type="Node3D" parent="." instance=ExtResource( 2 )]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2, 11.5 )
+
+[node name="nd_crawlspace" type="Node3D" parent="." instance=ExtResource( 4 )]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2, 11.5 )
+
+[node name="nd_wall" type="Node3D" parent="." instance=ExtResource( 5 )]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 2, 2.5 )
+
+[node name="nd_wall4" type="Node3D" parent="." instance=ExtResource( 5 )]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 2, 11.5 )
+
+[node name="nd_wall2" type="Node3D" parent="." instance=ExtResource( 5 )]
+transform = Transform3D( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 7, 2, 5 )
+
+[node name="nd_wall3" type="Node3D" parent="." instance=ExtResource( 5 )]
+transform = Transform3D( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 7, 2, 9 )
+
+[node name="nd_wall5" type="Node3D" parent="." instance=ExtResource( 5 )]
+transform = Transform3D( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -6, 2, 5 )
+
+[node name="nd_wall6" type="Node3D" parent="." instance=ExtResource( 5 )]
+transform = Transform3D( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -6, 2, 9 )
+
+[node name="nd_floor" type="Node3D" parent="." instance=ExtResource( 3 )]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 3, 2.5 )
+
+[node name="nd_floor2" type="Node3D" parent="." instance=ExtResource( 3 )]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 3, 6.5 )
+
+[node name="nd_floor3" type="Node3D" parent="." instance=ExtResource( 3 )]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 3, 2.5 )
+
+[node name="nd_floor4" type="Node3D" parent="." instance=ExtResource( 3 )]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 3, 6.5 )
+
+[node name="nd_floor5" type="Node3D" parent="." instance=ExtResource( 3 )]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 3, 2.5 )
+
+[node name="nd_floor6" type="Node3D" parent="." instance=ExtResource( 3 )]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 3, 6.5 )

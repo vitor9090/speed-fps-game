@@ -1,7 +1,7 @@
-extends Spatial
+extends Node3D
 
 func _ready():
-	set_as_toplevel(true)
+	set_as_top_level(true)
 	
 func _process(delta):
-	translation = Vector3(get_parent().translation.x, get_parent().translation.y - get_parent().find_node('CollisionShape').scale.y + 0.7, get_parent().translation.z)
+	position = Vector3(get_parent().position.x, get_parent().position.y - get_parent().find_child('CollisionShape3D').scale.y + 0.7, get_parent().position.z)

@@ -1,20 +1,21 @@
 [remap]
 
 importer="wavefront_obj"
+importer_version=1
 type="Mesh"
-path="res://.import/Peaches Castle.obj-509d9b88469ed0984a6e8c238006d9ec.mesh"
+uid="uid://ys0j7c4n64mf"
+path="res://.godot/imported/Peaches Castle.obj-509d9b88469ed0984a6e8c238006d9ec.mesh"
 
 [deps]
 
-files=[ "res://.import/Peaches Castle.obj-509d9b88469ed0984a6e8c238006d9ec.mesh" ]
+files=["res://.godot/imported/Peaches Castle.obj-509d9b88469ed0984a6e8c238006d9ec.mesh"]
 
 source_file="res://textures/mario64/Peaches Castle.obj"
-dest_files=[ "res://.import/Peaches Castle.obj-509d9b88469ed0984a6e8c238006d9ec.mesh", "res://.import/Peaches Castle.obj-509d9b88469ed0984a6e8c238006d9ec.mesh" ]
+dest_files=["res://.godot/imported/Peaches Castle.obj-509d9b88469ed0984a6e8c238006d9ec.mesh", "res://.godot/imported/Peaches Castle.obj-509d9b88469ed0984a6e8c238006d9ec.mesh"]
 
 [params]
 
 generate_tangents=true
-scale_mesh=Vector3( 1, 1, 1 )
-offset_mesh=Vector3( 0, 0, 0 )
-octahedral_compression=true
-optimize_mesh_flags=4286
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

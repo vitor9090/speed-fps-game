@@ -1,6 +1,6 @@
 extends HBoxContainer
 
-export (int) var displayed_points:int = 0
+@export var displayed_points:int = 0
 
 func _process(delta):
 	for children in range(get_children().size()):
